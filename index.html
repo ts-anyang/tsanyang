@@ -8,232 +8,403 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root {
-  --blue:#0759ba;
-  --ink:#17283e;
+  --blue:#0867c8;
+  --dark:#17283e;
   --muted:#69798c;
   --line:#e5eaf0;
 }
 * {box-sizing:border-box}
 body {
-  margin:0;background:#f6f8fb;color:var(--ink);
-  font-family:system-ui,-apple-system,'Noto Sans KR',Arial,sans-serif;
+  margin:0;
+  background:#f5f7fa;
+  color:var(--dark);
+  font-family:system-ui,"Malgun Gothic",sans-serif;
 }
-header {background:#fff;border-bottom:1px solid var(--line)}
+header {
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
 .top {
-  max-width:520px;margin:auto;display:flex;align-items:center;
-  gap:10px;padding:17px 20px;
+  max-width:520px;
+  margin:auto;
+  padding:17px 19px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand {
+  display:flex;
+  gap:9px;
+  align-items:center;
 }
 .logo {
-  font-size:27px;letter-spacing:-3px;font-weight:900;color:#0874c9;
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-3px;
+  color:#0874c9;
 }
-.logo:first-letter {color:#f39218}
-.brand {font-size:14px;font-weight:800}
-.sub {font-size:11px;color:var(--muted);margin-top:2px}
-main {max-width:520px;margin:28px auto;padding:0 16px}
+.logo:first-letter {color:#ed931f}
+.brandName {font-size:14px;font-weight:800}
+.menuIcon {
+  font-size:24px;
+  color:#26384f;
+  text-decoration:none;
+}
+main {
+  max-width:520px;
+  margin:25px auto;
+  padding:0 16px;
+}
 .card {
-  background:white;border:1px solid var(--line);
-  border-radius:17px;padding:25px 20px;
-  box-shadow:0 8px 24px #20385b08;margin-bottom:17px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:23px 20px;
+  margin-bottom:15px;
+  box-shadow:0 5px 22px #20385b08;
 }
-.hero {text-align:center;padding:12px 0 24px}
-.car {
-  width:64px;height:64px;border-radius:18px;background:#eef5ff;
-  display:grid;place-items:center;margin:0 auto 14px;color:var(--blue);
+.hero {
+  text-align:center;
+  padding:17px 0 28px;
 }
-h1 {font-size:25px;margin:0 0 10px;letter-spacing:-.8px}
-p {margin:0;color:var(--muted);line-height:1.65;font-size:14px}
-label {font-size:14px;font-weight:750;display:block;margin-bottom:10px}
+.carIcon {
+  width:70px;
+  height:70px;
+  margin:0 auto 15px;
+  display:grid;
+  place-items:center;
+  color:var(--blue);
+}
+h1 {
+  font-size:25px;
+  letter-spacing:-.7px;
+  margin:0 0 12px;
+}
+.description {
+  font-size:14px;
+  line-height:1.7;
+  color:var(--muted);
+}
+label {
+  display:block;
+  font-size:14px;
+  font-weight:750;
+  margin-bottom:10px;
+}
 input {
-  width:100%;padding:17px;border:1px solid #cad4e1;
-  border-radius:9px;font-size:17px;outline:none;
+  width:100%;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  padding:16px;
+  font-size:16px;
+  outline:none;
 }
-input:focus {
-  border-color:var(--blue);box-shadow:0 0 0 3px #0b62c21c;
-}
+input:focus {border-color:var(--blue)}
 button {cursor:pointer;font:inherit}
-button:disabled {opacity:.55;cursor:wait}
+button:disabled {opacity:.55}
 .primary {
-  width:100%;background:var(--blue);color:#fff;border:0;
-  border-radius:9px;padding:17px;font-size:16px;
-  font-weight:800;margin-top:13px;
+  width:100%;
+  border:0;
+  background:linear-gradient(110deg,#075bbf,#086bd4);
+  color:white;
+  border-radius:8px;
+  padding:16px;
+  font-size:16px;
+  font-weight:800;
+  margin-top:12px;
 }
-.note {font-size:12px;color:#78879a;margin-top:14px}
-.note:before {content:'ⓘ ';color:var(--blue)}
-#resultCard {display:none}
-.resultHead {
-  display:flex;align-items:center;justify-content:space-between;
-  gap:8px;margin-bottom:17px;
+.notice {
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  color:#66798d;
+  font-size:12px;
+  line-height:1.6;
+  margin-top:21px;
 }
-.resultHead h2 {margin:0;font-size:19px}
-.pill {
-  background:#eaf3ff;color:#0759ba;border-radius:99px;
-  padding:6px 10px;font-size:12px;font-weight:800;
+.noticeIcon {
+  color:var(--blue);
+  font-weight:800;
+  font-size:16px;
 }
-#status {
-  font-size:14px;color:var(--muted);
-  white-space:pre-wrap;line-height:1.6;
-}
-.photoFrame {
-  position:relative;margin-top:17px;border-radius:12px;
-  overflow:hidden;background:#e8edf3;aspect-ratio:4/3;
-  display:flex;align-items:center;justify-content:center;
-}
-.photoFrame img {width:100%;height:100%;object-fit:contain}
-.arrow {
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:39px;height:39px;border:0;border-radius:50%;
-  background:#ffffffdf;color:#143b65;font-size:24px;
-  display:grid;place-items:center;
-}
-.prev {left:9px}
-.next {right:9px}
-.counter {
-  text-align:right;font-size:13px;color:var(--muted);margin:11px 0;
-}
-.thumbs {display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px}
-.thumb {
-  width:65px;height:55px;flex:0 0 65px;padding:0;
-  border:2px solid transparent;border-radius:8px;
-  overflow:hidden;background:#e9edf3;
-}
-.thumb.active {border-color:var(--blue)}
-.thumb img {width:100%;height:100%;object-fit:cover}
-.secondary {
-  width:100%;border:0;background:#edf4fc;color:#0759ba;
-  padding:14px;border-radius:9px;font-weight:750;margin-top:14px;
-}
-.vehicle {
-  font-size:14px;margin-top:6px;color:var(--ink);font-weight:750;
-}
-.hidden {display:none!important}
-footer.page {
-  text-align:center;font-size:11px;color:#8792a1;padding:7px 0 24px;
-}
-
-/* 새 기능: 고객님의 한마디 바로가기 */
 .feedbackLink {
-  display:flex;align-items:center;gap:14px;
-  text-decoration:none;color:var(--ink);
-  padding:19px 20px;
+  display:flex;
+  gap:13px;
+  align-items:center;
+  padding:18px 20px;
+  color:var(--dark);
+  text-decoration:none;
 }
 .feedbackIcon {
-  width:47px;height:47px;flex:0 0 47px;
-  background:#eef5ff;border-radius:13px;
-  display:grid;place-items:center;color:var(--blue);
+  width:47px;
+  height:47px;
+  border-radius:13px;
+  background:#edf5ff;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+  font-size:25px;
 }
-.feedbackText {flex:1}
-.feedbackTitle {font-size:16px;font-weight:800}
-.feedbackDesc {font-size:12px;color:var(--muted);margin-top:4px}
-.chevron {color:var(--blue);font-size:24px}
+.feedbackCopy {flex:1}
+.feedbackTitle {font-size:15px;font-weight:800}
+.feedbackSub {
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+}
+.chevron {font-size:25px;color:#8b9bb0}
+.hidden {display:none!important}
+#resultCard {display:none}
+.resultHeader {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+.resultHeader h2 {font-size:18px;margin:0}
+.pill {
+  background:#eaf3ff;
+  color:#0759ba;
+  border-radius:20px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:750;
+}
+#status {
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.6;
+  white-space:pre-wrap;
+}
+.vehicleInfo {
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  font-weight:750;
+  font-size:16px;
+}
+.sectionTitle {
+  font-size:15px;
+  font-weight:800;
+  margin:20px 0 12px;
+}
+.photoFrame {
+  position:relative;
+  background:#e9edf3;
+  aspect-ratio:4/3;
+  border-radius:11px;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.photoFrame img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.arrow {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:50%;
+  background:#1b2b3ed9;
+  color:white;
+  font-size:24px;
+}
+.prev {left:8px}
+.next {right:8px}
+.counter {
+  text-align:right;
+  margin:8px 0;
+  font-size:12px;
+  color:var(--muted);
+}
+.thumbs {
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:3px 2px 10px;
+}
+.thumb {
+  flex:0 0 65px;
+  width:65px;
+  height:55px;
+  padding:0;
+  background:#edf1f6;
+  border:2px solid transparent;
+  border-radius:7px;
+  overflow:hidden;
+}
+.thumb.active {border-color:var(--blue)}
+.thumb img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.secondary {
+  display:block;
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#edf4fc;
+  color:#0759ba;
+  font-size:14px;
+  font-weight:750;
+  margin-top:13px;
+}
 .commentBox {
-  margin-top:23px;padding:16px;background:#f3f7fd;
-  border:1px solid #e2eaf5;border-radius:12px;
+  margin-top:22px;
+  padding:16px;
+  background:#f3f7fd;
+  border-radius:10px;
+  border:1px solid #e1ebf7;
 }
-.commentBox h3 {font-size:16px;margin:0 0 12px}
+.commentBox h3 {
+  margin:0 0 10px;
+  font-size:16px;
+}
 .commentText {
-  font-size:14px;line-height:1.7;white-space:pre-wrap;
+  font-size:14px;
+  line-height:1.7;
+  white-space:pre-wrap;
   overflow-wrap:anywhere;
+}
+footer {
+  text-align:center;
+  color:#8a97a7;
+  font-size:11px;
+  margin:26px 0;
 }
 </style>
 </head>
-
 <body>
+
 <header>
   <div class="top">
-    <div class="logo">TS</div>
-    <div>
-      <div class="brand">안양자동차검사소</div>
-      <div class="sub">한국교통안전공단 · 하체사진 조회 서비스</div>
+    <div class="brand">
+      <div class="logo">TS</div>
+      <div class="brandName">안양자동차검사소</div>
     </div>
+    <a class="menuIcon" href="feedback.html"
+       aria-label="고객님의 한마디">☰</a>
   </div>
 </header>
 
 <main>
-  <section class="card">
-    <div class="hero">
-      <div class="car">
-        <svg width="37" height="37" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="1.9"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="m5 17-1 2v1h3v-2m10-1 1 2v1h-3v-2M5 10l2-5h10l2 5M4 10h16v8H4zM4 13h3m10 0h3"/>
-        </svg>
-      </div>
-      <h1>하체사진 조회</h1>
-      <p>검사 시 촬영한 자동차 하체사진을<br>
-         간편하게 확인하세요.</p>
+
+<section class="card">
+  <div class="hero">
+    <div class="carIcon">
+      <svg width="56" height="56" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor"
+        stroke-width="2.2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M5 17l-1 2v1h3v-2m10-1 1 2v1h-3v-2"/>
+        <path d="M5 10l2-5h10l2 5M4 10h16v8H4z"/>
+        <path d="M4 13h3m10 0h3"/>
+      </svg>
     </div>
 
-    <label for="plate">차량번호</label>
-    <input id="plate" placeholder="예) 123가 4567"
-      autocomplete="off" inputmode="text" maxlength="14">
-    <button class="primary" id="searchBtn">
-      ⌕ &nbsp; 하체사진 조회하기
+    <h1>하체사진 조회</h1>
+    <p class="description">
+      검사 시 촬영한 차량 하체사진을<br>
+      간편하게 확인하세요.
+    </p>
+  </div>
+
+  <label for="plate">차량번호</label>
+  <input id="plate"
+    placeholder="예) 123가 4567"
+    autocomplete="off"
+    maxlength="14">
+
+  <button class="primary" id="searchBtn">
+    ⌕ &nbsp; 조회하기
+  </button>
+
+  <div class="notice">
+    <span class="noticeIcon">ⓘ</span>
+    <span>
+      검사 후 조회 가능한 하체사진을 제공합니다.<br>
+      차량번호 입력 시 최근 검사 사진이 표시됩니다.
+    </span>
+  </div>
+</section>
+
+<!-- 고객님의 한마디: 독립된 페이지로 이동 -->
+<section class="card" style="padding:0">
+  <a class="feedbackLink" href="feedback.html">
+    <div class="feedbackIcon">
+      <svg width="27" height="27" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor"
+        stroke-width="1.9" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5
+          8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7
+          A8.5 8.5 0 1 1 21 11.5z"/>
+        <path d="M8 12h8M8 15h5"/>
+      </svg>
+    </div>
+    <div class="feedbackCopy">
+      <div class="feedbackTitle">고객님의 한마디</div>
+      <div class="feedbackSub">
+        서비스에 대한 소중한 의견을 들려주세요.
+      </div>
+    </div>
+    <span class="chevron">›</span>
+  </a>
+</section>
+
+<section class="card" id="resultCard">
+  <div class="resultHeader">
+    <h2>하체사진 조회 결과</h2>
+    <span class="pill" id="countPill">조회 결과</span>
+  </div>
+
+  <div id="status" aria-live="polite"></div>
+
+  <div id="viewer" class="hidden">
+    <div class="vehicleInfo" id="vehicleLabel"></div>
+
+    <div class="sectionTitle">하체사진</div>
+
+    <div class="photoFrame">
+      <img id="mainPhoto" alt="자동차 하체사진">
+      <button class="arrow prev" id="prevBtn"
+        aria-label="이전 사진">‹</button>
+      <button class="arrow next" id="nextBtn"
+        aria-label="다음 사진">›</button>
+    </div>
+
+    <div class="counter" id="counter"></div>
+    <div class="thumbs" id="thumbs"></div>
+
+    <button class="secondary" id="saveBtn">
+      현재 사진 저장하기
     </button>
-    <div class="note">
-      검사 후 조회 가능한 기간 내의 사진이 제공됩니다.
+
+    <div class="commentBox hidden" id="commentArea">
+      <h3>검사소 점검 소견</h3>
+      <div class="commentText" id="commentText"></div>
+      <p class="description" style="font-size:12px;margin-top:10px">
+        검사 당시 확인 가능한 범위의 참고 안내입니다.
+      </p>
     </div>
-  </section>
 
-  <!-- 고객님의 한마디 아이콘 -->
-  <section class="card" style="padding:0">
-    <a class="feedbackLink" href="feedback.html">
-      <div class="feedbackIcon">
-        <svg width="27" height="27" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8
-          8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9
-          L3 21l1.9-5.7A8.4 8.4 0 0 1 4 11.5
-          8.5 8.5 0 0 1 8.7 3.9
-          8.4 8.4 0 0 1 12.5 3h.5a8.5 8.5 0 0 1 8 8v.5z"/>
-        </svg>
-      </div>
-      <div class="feedbackText">
-        <div class="feedbackTitle">고객님의 한마디</div>
-        <div class="feedbackDesc">
-          서비스에 대한 소중한 의견을 들려주세요.
-        </div>
-      </div>
-      <span class="chevron">›</span>
-    </a>
-  </section>
+    <button class="secondary" id="backBtn">
+      ☷ &nbsp; 목록으로 돌아가기
+    </button>
+  </div>
+</section>
 
-  <section class="card" id="resultCard" aria-live="polite">
-    <div class="resultHead">
-      <h2>하체사진 조회 결과</h2>
-      <span class="pill" id="countPill">조회 결과</span>
-    </div>
-    <div id="status"></div>
-    <div id="viewer" class="hidden">
-      <div class="vehicle" id="vehicleLabel"></div>
-      <div class="photoFrame">
-        <img id="mainPhoto" alt="자동차 하체사진">
-        <button class="arrow prev" id="prevBtn">‹</button>
-        <button class="arrow next" id="nextBtn">›</button>
-      </div>
-      <div class="counter" id="counter"></div>
-      <div class="thumbs" id="thumbs"></div>
-      <button class="secondary" id="saveBtn">
-        현재 사진 저장하기
-      </button>
+<footer>
+  TS 안양자동차검사소 · 하체사진 조회 서비스
+</footer>
 
-      <div class="commentBox hidden" id="commentArea">
-        <h3>검사소 점검 소견</h3>
-        <div class="commentText" id="commentText"></div>
-        <p style="font-size:12px;margin-top:10px">
-          검사 당시 확인 가능한 범위의 참고 안내입니다.
-        </p>
-      </div>
-
-      <button class="secondary" id="backBtn">
-        다른 차량 조회하기
-      </button>
-    </div>
-  </section>
-
-  <footer class="page">
-    TS 안양자동차검사소 · 자동차 하체사진 조회
-  </footer>
 </main>
 
 <script>
@@ -245,6 +416,7 @@ const SUPABASE_KEY =
 const db = window.supabase.createClient(
   SUPABASE_URL, SUPABASE_KEY
 );
+
 const $ = id => document.getElementById(id);
 
 let photosLoaded = [];
@@ -279,8 +451,12 @@ function showPhoto(i) {
     el.classList.toggle('active', n === active);
   });
 
-  $('prevBtn').classList.toggle('hidden', photosLoaded.length < 2);
-  $('nextBtn').classList.toggle('hidden', photosLoaded.length < 2);
+  $('prevBtn').classList.toggle(
+    'hidden', photosLoaded.length < 2
+  );
+  $('nextBtn').classList.toggle(
+    'hidden', photosLoaded.length < 2
+  );
 }
 
 $('prevBtn').onclick = () => showPhoto(active - 1);
@@ -333,6 +509,7 @@ $('searchBtn').onclick = async () => {
       .limit(1);
 
     if (ve) throw ve;
+    if (req !== requestId) return;
 
     if (!vehicles?.length) {
       showStatus('조회 가능한 사진이 없습니다.');
@@ -380,8 +557,10 @@ $('searchBtn').onclick = async () => {
     }
 
     $('status').textContent = '';
-    $('vehicleLabel').textContent = `차량번호  ${plate}`;
-    $('countPill').textContent = `총 ${photosLoaded.length}장`;
+    $('vehicleLabel').textContent =
+      '차량번호  ' + plate;
+    $('countPill').textContent =
+      `총 ${photosLoaded.length}장`;
 
     for (let i=0;i<photosLoaded.length;i++) {
       const btn = document.createElement('button');
@@ -392,14 +571,17 @@ $('searchBtn').onclick = async () => {
       img.src = photosLoaded[i].url;
       img.alt = `사진 ${i+1} 미리보기`;
       btn.appendChild(img);
-
       btn.onclick = () => showPhoto(i);
       $('thumbs').appendChild(btn);
     }
 
-    const comment = (vehicle.inspection_comment || '').trim();
+    const comment =
+      (vehicle.inspection_comment || '').trim();
+
     $('commentText').textContent = comment;
-    $('commentArea').classList.toggle('hidden', !comment);
+    $('commentArea').classList.toggle(
+      'hidden', !comment
+    );
 
     $('viewer').classList.remove('hidden');
     showPhoto(0);
@@ -407,7 +589,9 @@ $('searchBtn').onclick = async () => {
   } catch(e) {
     showStatus('조회 오류: ' + e.message);
   } finally {
-    if (req === requestId) $('searchBtn').disabled = false;
+    if (req === requestId) {
+      $('searchBtn').disabled = false;
+    }
   }
 };
 
