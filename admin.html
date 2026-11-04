@@ -1,678 +1,77 @@
-
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TS 안양자동차검사소 관리자</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-:root {
-  --blue:#1456a1;
-  --line:#dce5f0;
-  --bg:#f3f6fb;
-}
-* {box-sizing:border-box}
-body {
-  margin:0;
-  background:var(--bg);
-  color:#25354a;
-  font-family:system-ui,'Malgun Gothic',sans-serif;
-}
-header {
-  background:white;
-  border-bottom:1px solid var(--line);
-  text-align:center;
-  padding:20px 12px;
-}
-header h1 {font-size:20px;margin:0;color:var(--blue)}
-header p {font-size:12px;color:#64748b}
-main {max-width:600px;margin:22px auto;padding:0 14px}
-.card {
-  background:white;
-  border-radius:15px;
-  padding:21px;
-  margin-bottom:15px;
-  border:1px solid var(--line);
-}
-h2 {font-size:19px;margin:0 0 16px}
-h3 {font-size:15px;margin:18px 0 10px}
-label {
-  display:block;
-  font-size:14px;
-  font-weight:700;
-  margin:16px 0 8px;
-}
-input:not([type=checkbox]),textarea {
-  width:100%;
-  font:inherit;
-  padding:13px;
-  border:1px solid #cbd5e1;
-  border-radius:9px;
-}
-textarea {min-height:115px;resize:vertical;line-height:1.6}
-button {
-  cursor:pointer;
-  border:0;
-  border-radius:9px;
-  font:inherit;
-  font-weight:700;
-}
-button:disabled {opacity:.55;cursor:wait}
-.action {
-  display:block;
-  background:var(--blue);
-  color:white;
-  width:100%;
-  padding:14px;
-  margin-top:16px;
-}
-.secondary {background:#eaf2fb;color:var(--blue)}
-.hidden {display:none!important}
-.hint {font-size:13px;color:#64748b;line-height:1.6}
-.tabs {display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.tab {
-  background:white;
-  border:1px solid var(--line);
-  padding:15px 5px;
-  display:flex;
-  align-items:center;
-  flex-direction:column;
-  gap:6px;
-  color:#52657a;
-}
-.tab.active {
-  background:#eaf3ff;
-  border-color:var(--blue);
-  color:var(--blue);
-}
-.tabIcon {font-size:25px}
-.tabName {font-size:12px;text-align:center}
-.options {
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:13px;
-  background:#f8faff;
-  margin-top:12px;
-}
-.option {
-  display:flex;
-  align-items:flex-start;
-  gap:9px;
-  padding:8px 0;
-  font-size:13px;
-  font-weight:400;
-  margin:0;
-  line-height:1.5;
-}
-.option input {
-  width:18px;
-  height:18px;
-  margin:2px 0 0;
-  flex-shrink:0;
-}
-.status {
-  font-size:14px;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  line-height:1.7;
-}
-.entry {
-  padding:15px 0;
-  border-bottom:1px solid var(--line);
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  font-size:14px;
-}
-.entry small {
-  display:block;
-  color:#64748b;
-  margin-bottom:8px;
-}
-</style>
-</head>
-<body>
-<header>
-  <h1>TS 한국교통안전공단</h1>
-  <p>안양자동차검사소 · 하체사진 관리자</p>
-</header>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>TS 안양자동차검사소 | 관리자</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#1c3049;font-family:system-ui,'Malgun Gothic',sans-serif}header{background:#fff;border-bottom:1px solid #dfe7f0;padding:20px;text-align:center;color:#0759ba;font-weight:800}main{max-width:560px;margin:24px auto;padding:0 14px}.card{background:white;border:1px solid #e1e7ef;border-radius:15px;padding:22px;margin-bottom:15px;box-shadow:0 4px 18px #18345609}h1{font-size:23px}h2{font-size:18px}label{display:block;font-weight:700;margin:14px 0 7px}input,textarea{width:100%;border:1px solid #c9d4e2;border-radius:9px;padding:13px;font:inherit}textarea{resize:vertical;min-height:95px}button{border:0;border-radius:9px;padding:13px;background:#0759ba;color:white;font-weight:700;cursor:pointer;margin-top:12px}button:disabled{opacity:.5}button.full{width:100%}.secondary{background:#eaf2ff;color:#0759ba}.hidden{display:none!important}.muted{color:#65758b;font-size:13px;line-height:1.6}.status{white-space:pre-wrap;line-height:1.6;font-size:14px}.photo{position:relative;background:#e9eef5;border-radius:12px;overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center}.photo img{width:100%;height:100%;object-fit:contain}.photo button{position:absolute;top:45%;background:#ffffffe0;color:#0759ba;font-size:23px}.prev{left:8px}.next{right:8px}.thumbs{display:flex;gap:8px;overflow:auto}.thumbs button{padding:2px;background:#e6edf7;flex:0 0 65px;height:55px}.thumbs button.active{outline:2px solid #0759ba}.thumbs img{width:100%;height:100%;object-fit:cover}.comment{background:#f3f7fd;padding:15px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere}.entry{border-bottom:1px solid #e2e8f0;padding:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}small{color:#66758b}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.tab{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;background:white;color:#475569;border:1px solid #dce5f0;border-radius:12px;padding:13px 5px;font-size:23px;line-height:1.3}
+.tab small{font-size:12px;color:inherit}.tab.active{color:#0759ba;border-color:#0759ba;background:#eaf3ff}
+.choice-list{background:#f7faff;border:1px solid #dce5f0;border-radius:10px;padding:12px;margin-bottom:12px}
+.choice-list label{display:flex;gap:10px;align-items:flex-start;margin:0;padding:9px 0;font-size:13px;font-weight:400;line-height:1.5}
+.choice-list input{width:18px;height:18px;flex:0 0 18px;margin:2px 0}
+.choice-list .secondary{width:100%}
+</style></head><body><header>TS 한국교통안전공단 · 하체사진 관리자</header><main><section class="card" id="login"><h2>관리자 로그인</h2><label>이메일</label><input id="email" type="email"/><label>비밀번호</label><input id="password" type="password"/><button class="full" id="loginBtn">로그인</button></section>
+<div class="hidden" id="panel">
+<nav aria-label="관리자 메뉴" class="tabs">
+<button class="tab active" data-target="uploadTab" type="button">📷<small>사진 및 소견<br/>등록</small></button>
+<button class="tab" data-target="editTab" type="button">📝<small>점검 소견<br/>수정</small></button>
+<button class="tab" data-target="feedbackTab" type="button">💬<small>고객 피드백<br/>확인</small></button></nav>
+<section class="card" id="uploadTab"><h2>사진 및 점검 소견 등록</h2><p class="muted">사진은 1~7장, 점검 소견은 선택사항입니다.</p><label for="plate">차량번호</label><input id="plate" placeholder="12가3456"/><label for="photos">하체사진 (1~7장)</label><input accept="image/jpeg,image/png,image/webp" id="photos" multiple="" type="file"/><p class="muted" id="count">선택된 사진: 0장</p><label for="comment">검사소 점검 소견</label><div id="uploadOptions"></div><textarea id="comment" maxlength="1000" placeholder="직접 작성하거나 아래 문구를 선택하세요."></textarea><button class="full" id="upload">사진 및 점검 소견 등록</button></section>
+<section class="card hidden" id="editTab"><h2>기존 점검 소견 수정</h2><p class="muted">가장 최근 등록된 차량을 불러옵니다.</p><label for="editPlate">차량번호</label><input id="editPlate" placeholder="12가3456"/><button class="full secondary" id="loadComment">기존 소견 불러오기</button><div class="hidden" id="editFields"><label>점검 소견 문구 선택</label><div id="editOptions"></div><label for="editComment">점검 소견 수정</label><textarea id="editComment" maxlength="1000"></textarea><button class="full" id="saveComment">변경사항 저장</button></div></section>
+<section class="card hidden" id="feedbackTab"><h2>고객님의 한마디</h2><p class="muted">최근 접수된 의견 100건을 표시합니다.</p><button class="full secondary" id="refresh">접수 내역 새로고침</button><div id="feedbackList"></div></section>
+<button class="full secondary" id="logout">로그아웃</button></div>
+<section class="card"><h2>작업 상태</h2><div class="status" id="status" role="status">연결 확인 중...</div></section></main><script>const URL_BASE='https://qxilydmnxkhcxdybzlew.supabase.co';
+const KEY='sb_publishable_dgOcMAwzSnNozCaHlD6qHg_hXsnNO_t';
+const db=supabase.createClient(URL_BASE,KEY);
+const $=id=>document.getElementById(id);
+const clean=s=>s.replace(/\s/g,'').trim();
+const valid=s=>/^\d{2,3}[가-힣]\d{4}$/.test(s);
 
-<main>
-<section class="card" id="loginSection">
-  <h2>관리자 로그인</h2>
-  <label for="email">이메일</label>
-  <input id="email" type="email">
-  <label for="password">비밀번호</label>
-  <input id="password" type="password">
-  <button class="action" id="loginBtn">로그인</button>
-</section>
+const report=s=>$('status').textContent=s;let editId=null;
 
-<div id="adminPanel" class="hidden">
-
-  <nav class="tabs" aria-label="관리자 메뉴">
-    <button class="tab active" data-tab="uploadSection">
-      <span class="tabIcon">📷</span>
-      <span class="tabName">사진 및 소견<br>등록</span>
-    </button>
-    <button class="tab" data-tab="editSection">
-      <span class="tabIcon">📝</span>
-      <span class="tabName">점검 소견<br>수정</span>
-    </button>
-    <button class="tab" data-tab="feedbackSection">
-      <span class="tabIcon">💬</span>
-      <span class="tabName">고객 피드백<br>확인</span>
-    </button>
-  </nav>
-
-  <!-- 첫 번째 메뉴 -->
-  <section class="card" id="uploadSection">
-    <h2>사진 및 점검 소견 등록</h2>
-    <p class="hint">
-      차량번호, 사진, 점검 소견을 등록합니다.
-    </p>
-
-    <label for="plate">차량번호</label>
-    <input id="plate" placeholder="예) 123가4567">
-
-    <label for="photos">하체사진 (1~7장)</label>
-    <input id="photos" type="file"
-      accept="image/jpeg,image/png,image/webp" multiple>
-    <p class="hint" id="fileCount">선택된 사진: 0장</p>
-
-    <h3>검사소 점검 소견</h3>
-    <p class="hint">
-      실제 확인한 항목을 여러 개 선택할 수 있습니다.
-    </p>
-    <div id="uploadOptions" class="options"></div>
-
-    <label for="comment">직접 작성 및 수정</label>
-    <textarea id="comment" maxlength="1000"
-      placeholder="점검 소견을 직접 작성하거나 선택 문구를 추가하세요."></textarea>
-
-    <button class="action" id="uploadBtn">
-      사진 및 점검 소견 등록
-    </button>
-  </section>
-
-  <!-- 두 번째 메뉴 -->
-  <section class="card hidden" id="editSection">
-    <h2>기존 점검 소견 수정</h2>
-    <p class="hint">
-      차량번호로 가장 최근 등록한 소견을 불러옵니다.
-    </p>
-
-    <label for="editPlate">차량번호</label>
-    <input id="editPlate" placeholder="예) 123가4567">
-
-    <button class="action secondary" id="loadComment">
-      기존 점검 소견 불러오기
-    </button>
-
-    <div id="editFields" class="hidden">
-      <h3>수정할 소견 선택</h3>
-      <div id="editOptions" class="options"></div>
-
-      <label for="editComment">점검 소견 수정</label>
-      <textarea id="editComment" maxlength="1000"></textarea>
-
-      <button class="action" id="saveComment">
-        변경사항 저장
-      </button>
-    </div>
-  </section>
-
-  <!-- 세 번째 메뉴 -->
-  <section class="card hidden" id="feedbackSection">
-    <h2>고객님의 한마디</h2>
-    <p class="hint">
-      고객이 제출한 의견을 최신순으로 표시합니다.
-    </p>
-
-    <button class="action secondary" id="refreshBtn">
-      접수 내역 새로고침
-    </button>
-
-    <div id="feedbackList"></div>
-  </section>
-
-  <section class="card">
-    <h2>작업 상태</h2>
-    <div class="status" id="status" role="status">
-      연결 확인 중...
-    </div>
-  </section>
-
-  <button class="action secondary" id="logoutBtn">
-    로그아웃
-  </button>
-</div>
-</main>
-
-<script>
-const SUPABASE_URL =
-  'https://qxilydmnxkhcxdybzlew.supabase.co';
-const SUPABASE_KEY =
-  'sb_publishable_dgOcMAwzSnNozCaHlD6qHg_hXsnNO_t';
-
-const db = window.supabase.createClient(
-  SUPABASE_URL, SUPABASE_KEY
-);
-
-const el = id => document.getElementById(id);
-const report = msg => el('status').textContent = msg;
-const clean = s => s.replace(/\s/g,'').trim();
-const valid = s => /^\d{2,3}[가-힣]\d{4}$/.test(s);
-
-let editId = null;
-
-// 관리자가 선택할 수 있는 점검 문구
-const templates = [
-  '차량 하부 육안 확인 결과 특이사항 없음',
-  '엔진 및 변속기 주변 누유 흔적 확인',
-  '차량 하부 부품의 부식 흔적 확인',
-  '배기계통 부식 및 손상 흔적 확인',
-  '차량 하부 보호커버 손상 확인',
-  '서스펜션 주변 부품 상태 확인 필요',
-  '하부 일부 구간은 커버로 인해 확인 제한',
-  '추가적인 정비점검 권장'
+const templates=[
+ '차량 하부 육안 확인 결과 특이사항 없음',
+ '엔진 및 변속기 주변 누유 흔적 확인',
+ '차량 하부 부품의 부식 흔적 확인',
+ '배기계통 부식 및 손상 흔적 확인',
+ '차량 하부 보호커버 손상 확인',
+ '서스펜션 주변 부품 상태 확인 필요',
+ '하부 일부 구간은 커버로 인해 확인 제한',
+ '추가적인 정비점검 권장'
 ];
-
-// 문구 선택 기능 생성
-function createOptions(containerId, textareaId) {
-  const box = el(containerId);
-
-  templates.forEach(text => {
-    const label = document.createElement('label');
-    label.className = 'option';
-
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.value = text;
-
-    const span = document.createElement('span');
-    span.textContent = text;
-
-    label.append(cb,span);
-    box.appendChild(label);
-  });
-
-  const btn = document.createElement('button');
-  btn.className = 'action secondary';
-  btn.textContent = '선택한 문구 추가하기';
-  btn.type = 'button';
-
-  btn.onclick = () => {
-    const area = el(textareaId);
-
-    const selected = [...box.querySelectorAll(
-      'input:checked'
-    )].map(cb => cb.value);
-
-    if (!selected.length) {
-      report('추가할 문구를 선택해 주세요.');
-      return;
-    }
-
-    const old = area.value.trim();
-    const lines = old.split('\n').map(s => s.trim());
-
-    const additions = selected.filter(
-      s => !lines.includes(s)
-    );
-
-    const result = [old,...additions]
-      .filter(Boolean).join('\n');
-
-    if (result.length > 1000) {
-      report('점검 소견은 최대 1000자입니다.');
-      return;
-    }
-
-    area.value = result;
-
-    box.querySelectorAll('input').forEach(
-      cb => cb.checked = false
-    );
-
-    report('선택한 문구를 입력창에 추가했습니다.');
-  };
-
-  box.appendChild(btn);
+function makeOptions(boxId,textId){
+ const box=$(boxId),list=document.createElement('div');list.className='choice-list';
+ for(const template of templates){
+  const label=document.createElement('label'),check=document.createElement('input'),span=document.createElement('span');
+  check.type='checkbox';check.value=template;span.textContent=template;label.append(check,span);list.append(label);
+ }
+ const btn=document.createElement('button');btn.type='button';btn.className='full secondary';btn.textContent='선택한 문구 추가하기';
+ btn.onclick=()=>{
+  const area=$(textId),existing=area.value.trim(),lines=existing.split('\n').map(x=>x.trim());
+  const add=[...list.querySelectorAll('input:checked')].map(x=>x.value).filter(x=>!lines.includes(x));
+  if(!add.length){report('추가할 새 문구를 선택해 주세요.');return;}
+  const result=[existing,...add].filter(Boolean).join('\n');
+  if(result.length>1000){report('점검 소견은 최대 1000자입니다.');return;}
+  area.value=result;list.querySelectorAll('input').forEach(x=>x.checked=false);report('선택한 문구를 추가했습니다.');
+ };
+ box.append(list,btn);
 }
-
-createOptions('uploadOptions','comment');
-createOptions('editOptions','editComment');
-
-// 관리자 메뉴 전환
-document.querySelectorAll('.tab').forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll('.tab').forEach(
-      b => b.classList.remove('active')
-    );
-    btn.classList.add('active');
-
-    ['uploadSection','editSection','feedbackSection']
-      .forEach(id => {
-        el(id).classList.toggle(
-          'hidden', id !== btn.dataset.tab
-        );
-      });
-
-    report('메뉴를 선택했습니다.');
-  };
-});
-
-function loggedOut() {
-  el('loginSection').classList.remove('hidden');
-  el('adminPanel').classList.add('hidden');
-}
-
-async function verifyAdmin() {
-  const {data:{user},error:authError} =
-    await db.auth.getUser();
-
-  if (authError || !user) {
-    loggedOut();
-    return false;
-  }
-
-  const {data,error} = await db
-    .from('admin_users')
-    .select('user_id')
-    .eq('user_id',user.id)
-    .maybeSingle();
-
-  if (error) throw error;
-
-  if (!data) {
-    loggedOut();
-    report('관리자 권한이 없습니다.');
-    return false;
-  }
-
-  el('loginSection').classList.add('hidden');
-  el('adminPanel').classList.remove('hidden');
-  return true;
-}
-
-// 로그인
-el('loginBtn').onclick = async () => {
-  const btn = el('loginBtn');
-  btn.disabled = true;
-
-  try {
-    const {error} = await db.auth.signInWithPassword({
-      email:el('email').value.trim(),
-      password:el('password').value
-    });
-
-    if (error) throw error;
-
-    el('password').value = '';
-
-    if (await verifyAdmin()) {
-      report('관리자 로그인 완료');
-    }
-  } catch(e) {
-    report('로그인 오류: '+e.message);
-  } finally {
-    btn.disabled = false;
-  }
-};
-
-el('logoutBtn').onclick = async () => {
-  const {error} = await db.auth.signOut();
-
-  if (error) {
-    report('로그아웃 오류: '+error.message);
-    return;
-  }
-
-  loggedOut();
-  report('로그아웃했습니다.');
-};
-
-el('photos').onchange = () => {
-  el('fileCount').textContent =
-    '선택된 사진: '+el('photos').files.length+'장';
-};
-
-// 사진 및 소견 등록
-el('uploadBtn').onclick = async () => {
-  const plate = clean(el('plate').value);
-  const files = [...el('photos').files];
-  const comment = el('comment').value.trim();
-
-  if (!valid(plate)) {
-    report('차량번호를 확인해 주세요.');
-    return;
-  }
-
-  if (files.length < 1 || files.length > 7) {
-    report('사진은 1~7장을 선택해 주세요.');
-    return;
-  }
-
-  if (files.some(f =>
-    !['image/jpeg','image/png','image/webp'].includes(f.type)
-  )) {
-    report('JPG, PNG, WEBP 사진만 가능합니다.');
-    return;
-  }
-
-  const btn = el('uploadBtn');
-  btn.disabled = true;
-
-  try {
-    if (!await verifyAdmin()) {
-      throw Error('관리자 로그인이 필요합니다.');
-    }
-
-    report('차량정보 등록 중...');
-
-    const {data:vehicle,error:ve} = await db
-      .from('vehicles')
-      .insert({
-        plate_number:plate,
-        inspection_comment:comment || null
-      })
-      .select('id')
-      .single();
-
-    if (ve) throw ve;
-
-    let done = 0;
-
-    for (let i=0;i<files.length;i++) {
-      const file = files[i];
-
-      const ext = {
-        'image/jpeg':'jpg',
-        'image/png':'png',
-        'image/webp':'webp'
-      }[file.type];
-
-      const path =
-        vehicle.id+'/'+(i+1)+'-'+crypto.randomUUID()+'.'+ext;
-
-      report(`사진 업로드 중... ${i+1}/${files.length}`);
-
-      const {error:ue} = await db.storage
-        .from('underbody-photos')
-        .upload(path,file,{
-          contentType:file.type,
-          upsert:false
-        });
-
-      if (ue) throw ue;
-
-      const {error:pe} = await db
-        .from('vehicle_photos')
-        .insert({
-          vehicle_id:vehicle.id,
-          storage_path:path,
-          photo_order:i+1
-        });
-
-      if (pe) throw pe;
-      done++;
-    }
-
-    el('plate').value = '';
-    el('photos').value = '';
-    el('comment').value = '';
-    el('fileCount').textContent = '선택된 사진: 0장';
-
-    report(
-      '등록 성공!\n차량번호: '+plate+
-      '\n사진: '+done+'장'
-    );
-
-  } catch(e) {
-    report(
-      '등록 오류: '+e.message+
-      '\n일부 자료가 저장됐을 수 있으므로 재등록 전 확인하세요.'
-    );
-  } finally {
-    btn.disabled = false;
-  }
-};
-
-// 기존 점검 소견 불러오기
-el('loadComment').onclick = async () => {
-  editId = null;
-  el('editFields').classList.add('hidden');
-
-  const plate = clean(el('editPlate').value);
-
-  if (!valid(plate)) {
-    report('차량번호를 확인해 주세요.');
-    return;
-  }
-
-  try {
-    if (!await verifyAdmin()) {
-      throw Error('관리자 로그인이 필요합니다.');
-    }
-
-    const {data,error} = await db
-      .from('vehicles')
-      .select('id,inspection_comment')
-      .eq('plate_number',plate)
-      .order('created_at',{ascending:false})
-      .limit(1);
-
-    if (error) throw error;
-    if (!data?.length) {
-      throw Error('등록된 차량이 없습니다.');
-    }
-
-    editId = data[0].id;
-    el('editComment').value =
-      data[0].inspection_comment || '';
-
-    el('editFields').classList.remove('hidden');
-    report('기존 점검 소견을 불러왔습니다.');
-
-  } catch(e) {
-    report('조회 오류: '+e.message);
-  }
-};
-
-// 점검 소견 수정 저장
-el('saveComment').onclick = async () => {
-  if (!editId) {
-    report('먼저 차량을 조회해 주세요.');
-    return;
-  }
-
-  try {
-    if (!await verifyAdmin()) {
-      throw Error('관리자 로그인이 필요합니다.');
-    }
-
-    const {data,error} = await db
-      .from('vehicles')
-      .update({
-        inspection_comment:
-          el('editComment').value.trim() || null
-      })
-      .eq('id',editId)
-      .select('id');
-
-    if (error) throw error;
-
-    if (!data?.length) {
-      throw Error('수정 권한 또는 대상 차량을 확인하세요.');
-    }
-
-    report('검사소 점검 소견 수정 완료');
-
-  } catch(e) {
-    report('저장 오류: '+e.message);
-  }
-};
-
-// 고객 피드백 확인
-async function refreshFeedback() {
-  if (!await verifyAdmin()) {
-    throw Error('관리자 로그인이 필요합니다.');
-  }
-
-  const {data,error} = await db
-    .from('customer_feedback')
-    .select('id,message,created_at')
-    .order('created_at',{ascending:false})
-    .limit(100);
-
-  if (error) throw error;
-
-  const box = el('feedbackList');
-  box.replaceChildren();
-
-  if (!data?.length) {
-    box.textContent = '접수된 고객 의견이 없습니다.';
-    return;
-  }
-
-  for (const item of data) {
-    const div = document.createElement('div');
-    div.className = 'entry';
-
-    const date = document.createElement('small');
-    date.textContent =
-      new Date(item.created_at).toLocaleString('ko-KR');
-
-    const msg = document.createElement('div');
-    msg.textContent = item.message;
-
-    div.append(date,msg);
-    box.appendChild(div);
-  }
-}
-
-el('refreshBtn').onclick = async () => {
-  try {
-    await refreshFeedback();
-    report('고객 의견을 불러왔습니다.');
-  } catch(e) {
-    report('의견 조회 오류: '+e.message);
-  }
-};
-
-// 초기 로그인 상태 확인
-(async () => {
-  try {
-    const ok = await verifyAdmin();
-    report(
-      ok ? '관리자 로그인 완료' :
-      '관리자 로그인이 필요합니다.'
-    );
-  } catch(e) {
-    loggedOut();
-    report('연결 오류: '+e.message);
-  }
-})();
-</script>
-</body>
-</html>
+makeOptions('uploadOptions','comment');makeOptions('editOptions','editComment');
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));
+ ['uploadTab','editTab','feedbackTab'].forEach(id=>$(id).classList.toggle('hidden',id!==btn.dataset.target));
+}));
+
+function loggedOut(){$('login').classList.remove('hidden');$('panel').classList.add('hidden')}
+async function verify(){const {data:{user},error}=await db.auth.getUser();if(error||!user){loggedOut();return false}const {data,error:e}=await db.from('admin_users').select('user_id').eq('user_id',user.id).maybeSingle();if(e)throw e;if(!data){loggedOut();report('관리자 권한이 없습니다.');return false}$('login').classList.add('hidden');$('panel').classList.remove('hidden');return true}
+$('loginBtn').onclick=async()=>{$('loginBtn').disabled=true;try{const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)throw error;$('password').value='';if(await verify()){report('로그인 성공');await refresh()}}catch(e){report('로그인 오류: '+e.message)}finally{$('loginBtn').disabled=false}};
+$('logout').onclick=async()=>{await db.auth.signOut();loggedOut();report('로그아웃했습니다.')};
+$('photos').onchange=()=>$('count').textContent='선택된 사진: '+$('photos').files.length+'장';
+$('upload').onclick=async()=>{const plate=clean($('plate').value),files=[...$('photos').files],comment=$('comment').value.trim();if(!valid(plate)){report('차량번호를 확인하세요.');return}if(files.length<1||files.length>7){report('사진을 1~7장 선택하세요.');return}if(files.some(f=>!['image/jpeg','image/png','image/webp'].includes(f.type))){report('JPG/PNG/WEBP만 가능합니다.');return}$('upload').disabled=true;
+try{if(!await verify())throw Error('관리자 로그인이 필요합니다.');report('차량 등록 중...');const {data:v,error:ve}=await db.from('vehicles').insert({plate_number:plate,inspection_comment:comment||null}).select('id').single();if(ve)throw ve;let done=0;
+for(let i=0;i<files.length;i++){const file=files[i],ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[file.type],path=v.id+'/'+(i+1)+'-'+crypto.randomUUID()+'.'+ext;report(`사진 업로드 중... ${i+1}/${files.length}`);const {error:ue}=await db.storage.from('underbody-photos').upload(path,file,{contentType:file.type,upsert:false});if(ue)throw ue;const {error:pe}=await db.from('vehicle_photos').insert({vehicle_id:v.id,storage_path:path,photo_order:i+1});if(pe)throw pe;done++}
+$('plate').value='';$('photos').value='';$('comment').value='';$('count').textContent='선택된 사진: 0장';report(`등록 성공: ${plate}, 사진 ${done}장`);
+}catch(e){report('등록 오류: '+e.message+'\n일부 파일이 등록됐을 수 있으니 재등록 전 확인하세요.')}finally{$('upload').disabled=false}};
+$('loadComment').onclick=async()=>{editId=null;$('editFields').classList.add('hidden');const plate=clean($('editPlate').value);if(!valid(plate)){report('차량번호를 확인하세요.');return}try{if(!await verify())throw Error('관리자 로그인이 필요합니다.');const {data,error}=await db.from('vehicles').select('id,inspection_comment').eq('plate_number',plate).order('created_at',{ascending:false}).limit(1);if(error)throw error;if(!data?.length)throw Error('등록된 차량이 없습니다.');editId=data[0].id;$('editComment').value=data[0].inspection_comment||'';$('editFields').classList.remove('hidden');report('최근 등록 소견을 불러왔습니다.')}catch(e){report('조회 오류: '+e.message)}};
+$('saveComment').onclick=async()=>{if(!editId){report('먼저 차량을 불러오세요.');return}try{if(!await verify())throw Error('관리자 로그인이 필요합니다.');const {data,error}=await db.from('vehicles').update({inspection_comment:$('editComment').value.trim()||null}).eq('id',editId).select('id');if(error)throw error;if(!data?.length)throw Error('수정 권한 또는 대상 차량을 확인하세요.');report('점검 소견 저장 완료')}catch(e){report('저장 오류: '+e.message)}};
+async function refresh(){const {data,error}=await db.from('customer_feedback').select('id,nickname,message,created_at').order('created_at',{ascending:false}).limit(100);if(error)throw error;const list=$('feedbackList');list.replaceChildren();if(!data?.length){list.textContent='접수된 의견이 없습니다.';return}for(const item of data){const div=document.createElement('div'),date=document.createElement('small'),msg=document.createElement('div');div.className='entry';date.textContent=new Date(item.created_at).toLocaleString('ko-KR');msg.textContent=item.message;const nick=document.createElement('strong');nick.textContent=item.nickname||'익명';nick.style.display='block';nick.style.margin='6px 0';div.append(date,nick,msg);list.append(div)}}
+$('refresh').onclick=async()=>{try{if(await verify()){await refresh();report('최근 100건을 불러왔습니다.')}}catch(e){report('의견 조회 오류: '+e.message)}};
+verify().then(async ok=>{if(ok){report('관리자 로그인 완료');try{await refresh()}catch(e){report('의견 조회 오류: '+e.message)}}else report('로그인이 필요합니다.')}).catch(e=>report('연결 오류: '+e.message));
+</script></body></html>
