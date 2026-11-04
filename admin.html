@@ -28,3 +28,143 @@ async function refresh(){const {data,error}=await db.from('customer_feedback').s
 $('refresh').onclick=async()=>{try{if(await verify()){await refresh();report('최근 100건을 불러왔습니다.')}}catch(e){report('의견 조회 오류: '+e.message)}};
 verify().then(async ok=>{if(ok){report('관리자 로그인 완료');try{await refresh()}catch(e){report('의견 조회 오류: '+e.message)}}else report('로그인이 필요합니다.')}).catch(e=>report('연결 오류: '+e.message));
 </script></body></html>
+
+<!-- 검사소 점검 소견 선택 기능 -->
+<style>
+.comment-options {
+  margin-top: 15px;
+  padding: 15px;
+  border: 1px solid #dbe5f0;
+  border-radius: 10px;
+  background: #f7faff;
+}
+.comment-options h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+.comment-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.comment-option input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin: 2px 0 0;
+}
+.comment-add {
+  width: 100%;
+  background: #1456a1;
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  padding: 13px;
+  margin-top: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+</style>
+
+<script>
+(function () {
+  // 검사원이 확인 후 선택할 수 있는 문구
+  const commentTemplates = [
+    '차량 하부 육안 확인 결과 특이사항 없음',
+    '엔진 및 변속기 주변 누유 흔적 확인',
+    '차량 하부 부품의 부식 흔적 확인',
+    '배기계통 부식 및 손상 흔적 확인',
+    '차량 하부 보호커버 손상 확인',
+    '서스펜션 주변 부품 상태 확인 필요',
+    '하부 일부 구간은 커버로 인해 확인 제한',
+    '추가적인 정비점검 권장'
+  ];
+
+  function addOptions(textareaId) {
+    const textarea = document.getElementById(textareaId);
+    if (!textarea) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'comment-options';
+
+    const title = document.createElement('h3');
+    title.textContent = '점검 소견 문구 선택';
+    wrapper.appendChild(title);
+
+    const description = document.createElement('p');
+    description.textContent =
+      '실제로 확인한 항목을 선택해 주세요. 복수 선택 가능합니다.';
+    description.style.fontSize = '13px';
+    wrapper.appendChild(description);
+
+    commentTemplates.forEach((message) => {
+      const label = document.createElement('label');
+      label.className = 'comment-option';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.value = message;
+
+      const text = document.createElement('span');
+      text.textContent = message;
+
+      label.appendChild(checkbox);
+      label.appendChild(text);
+      wrapper.appendChild(label);
+    });
+
+    const addButton = document.createElement('button');
+    addButton.type = 'button';
+    addButton.className = 'comment-add';
+    addButton.textContent = '선택한 문구 추가하기';
+
+    addButton.addEventListener('click', () => {
+      const selected = Array.from(
+        wrapper.querySelectorAll('input:checked')
+      ).map(item => item.value);
+
+      if (!selected.length) {
+        alert('추가할 문구를 선택해 주세요.');
+        return;
+      }
+
+      const existing = textarea.value.trim();
+      const additions = selected.filter(
+        message => !existing.split('\n')
+          .some(line => line.trim() === message)
+      );
+
+      const combined = [
+        existing,
+        ...additions
+      ].filter(Boolean).join('\n');
+
+      if (combined.length > textarea.maxLength &&
+          textarea.maxLength > 0) {
+        alert('입력 가능한 글자 수를 초과했습니다.');
+        return;
+      }
+
+      textarea.value = combined;
+
+      wrapper.querySelectorAll('input').forEach(
+        checkbox => checkbox.checked = false
+      );
+
+      textarea.focus();
+    });
+
+    wrapper.appendChild(addButton);
+
+    // 기존 직접 작성란 바로 위에 추가
+    textarea.parentNode.insertBefore(wrapper, textarea);
+  }
+
+  // 신규 사진 등록과 기존 소견 수정 양쪽에 적용
+  addOptions('comment');
+  addOptions('editComment');
+})();
+</script>
