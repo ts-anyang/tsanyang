@@ -1,149 +1,23 @@
-
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>고객님의 한마디 | TS 안양자동차검사소</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-* {box-sizing:border-box}
-body {
-  margin:0;background:#f6f8fb;color:#17283e;
-  font-family:system-ui,'Noto Sans KR',sans-serif;
-}
-header {
-  background:white;border-bottom:1px solid #e5eaf0;
-  padding:19px;text-align:center;
-}
-.brand {font-size:16px;font-weight:800}
-.sub {font-size:11px;color:#69798c;margin-top:4px}
-main {max-width:520px;margin:28px auto;padding:0 16px}
-.card {
-  background:white;border:1px solid #e5eaf0;
-  border-radius:17px;padding:25px 20px;
-}
-.icon {
-  width:64px;height:64px;border-radius:18px;
-  background:#eef5ff;color:#0759ba;
-  display:grid;place-items:center;
-  margin:0 auto 15px;font-size:30px;
-}
-h1 {font-size:24px;text-align:center;margin-bottom:10px}
-.desc {
-  text-align:center;color:#69798c;
-  font-size:14px;line-height:1.7;margin-bottom:25px;
-}
-label {display:block;font-weight:750;margin-bottom:10px}
-textarea {
-  width:100%;min-height:155px;resize:vertical;
-  border:1px solid #cad4e1;border-radius:9px;
-  padding:15px;font-size:15px;line-height:1.7;
-  font-family:inherit;
-}
-textarea:focus {outline:2px solid #0759ba}
-.hint {font-size:12px;color:#78879a;line-height:1.7;margin:12px 0}
-.count {text-align:right;font-size:12px;color:#78879a}
-button {
-  width:100%;background:#0759ba;color:white;
-  border:0;border-radius:9px;padding:16px;
-  font-size:16px;font-weight:800;cursor:pointer;
-}
-button:disabled {opacity:.5}
-.back {
-  display:block;text-align:center;margin-top:20px;
-  text-decoration:none;color:#0759ba;font-size:14px;font-weight:700;
-}
-#status {font-size:14px;line-height:1.7;margin-top:14px}
-</style>
-</head>
-
-<body>
-<header>
-  <div class="brand">TS 안양자동차검사소</div>
-  <div class="sub">한국교통안전공단 · 하체사진 조회 서비스</div>
-</header>
-
-<main>
-  <section class="card">
-    <div class="icon">💬</div>
-    <h1>고객님의 한마디</h1>
-    <p class="desc">
-      보다 나은 자동차검사 서비스를 위해<br>
-      고객님의 소중한 의견을 들려주세요.
-    </p>
-
-    <label for="message">의견 작성</label>
-    <textarea id="message" maxlength="500"
-      placeholder="칭찬, 불편사항, 개선 의견 등을 자유롭게 남겨주세요."></textarea>
-
-    <div class="count" id="count">0 / 500자</div>
-
-    <p class="hint">
-      ※ 이름, 연락처, 차량번호 등 개인정보는 입력하지 마세요.<br>
-      ※ 작성한 의견은 관리자만 확인하며 다른 고객에게 공개되지 않습니다.
-    </p>
-
-    <button id="submit">의견 제출하기</button>
-    <div id="status" role="status" aria-live="polite"></div>
-
-    <a class="back" href="index.html">← 하체사진 조회로 돌아가기</a>
-  </section>
-</main>
-
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>고객님의 한마디 | TS 안양자동차검사소</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>*{box-sizing:border-box}body{margin:0;background:#f6f8fb;color:#17283e;font-family:system-ui,'Noto Sans KR',sans-serif}header{background:white;border-bottom:1px solid #e5eaf0;padding:19px;text-align:center}.brand{font-size:16px;font-weight:800}.sub{font-size:11px;color:#69798c;margin-top:4px}main{max-width:520px;margin:28px auto;padding:0 16px}.card{background:white;border:1px solid #e5eaf0;border-radius:17px;padding:25px 20px}.icon{width:64px;height:64px;border-radius:18px;background:#eef5ff;color:#0759ba;display:grid;place-items:center;margin:0 auto 15px;font-size:30px}h1{font-size:24px;text-align:center;margin-bottom:10px}.desc{text-align:center;color:#69798c;font-size:14px;line-height:1.7;margin-bottom:25px}label{display:block;font-weight:750;margin:16px 0 10px}input,textarea{width:100%;border:1px solid #cad4e1;border-radius:9px;padding:15px;font-size:15px;line-height:1.7;font-family:inherit}textarea{min-height:155px;resize:vertical}input:focus,textarea:focus{outline:2px solid #0759ba}.hint{font-size:12px;color:#78879a;line-height:1.7;margin:12px 0}.count{text-align:right;font-size:12px;color:#78879a}button{width:100%;background:#0759ba;color:white;border:0;border-radius:9px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;margin-top:15px}button:disabled{opacity:.5}.back{display:block;text-align:center;margin-top:20px;text-decoration:none;color:#0759ba;font-size:14px;font-weight:700}#status{font-size:14px;line-height:1.7;margin-top:14px;white-space:pre-wrap}</style>
+</head><body><header><div class="brand">TS 안양자동차검사소</div><div class="sub">한국교통안전공단 · 하체사진 조회 서비스</div></header><main><section class="card"><div class="icon">💬</div><h1>고객님의 한마디</h1><p class="desc">보다 나은 자동차검사 서비스를 위해<br>고객님의 소중한 의견을 들려주세요.</p><label for="nickname">닉네임 (필수)</label><input id="nickname" maxlength="20" placeholder="예) 안전운전365" autocomplete="off"><div class="count" id="nameCount">0 / 20자</div><label for="message">의견 작성 (필수)</label><textarea id="message" maxlength="500" placeholder="칭찬, 불편사항, 개선 의견 등을 자유롭게 남겨주세요."></textarea><div class="count" id="count">0 / 500자</div><p class="hint">※ 실명, 연락처, 차량번호 등 개인정보는 입력하지 마세요.<br>※ 작성한 의견은 관리자만 확인하며 다른 고객에게 공개되지 않습니다.</p><button id="submit" type="button">의견 제출하기</button><div id="status" role="status" aria-live="polite"></div><a class="back" href="index.html">← 하체사진 조회로 돌아가기</a></section></main>
 <script>
-const db = window.supabase.createClient(
-  'https://qxilydmnxkhcxdybzlew.supabase.co',
-  'sb_publishable_dgOcMAwzSnNozCaHlD6qHg_hXsnNO_t'
-);
-
-const message = document.getElementById('message');
-const count = document.getElementById('count');
-const status = document.getElementById('status');
-const submit = document.getElementById('submit');
-
-let submitted = false;
-
-message.addEventListener('input', () => {
-  count.textContent = message.value.length + ' / 500자';
+const db=window.supabase.createClient('https://qxilydmnxkhcxdybzlew.supabase.co','sb_publishable_dgOcMAwzSnNozCaHlD6qHg_hXsnNO_t');
+const nickname=document.getElementById('nickname'),message=document.getElementById('message'),count=document.getElementById('count'),nameCount=document.getElementById('nameCount'),status=document.getElementById('status'),submit=document.getElementById('submit');
+let submitted=false;
+message.addEventListener('input',()=>count.textContent=message.value.length+' / 500자');
+nickname.addEventListener('input',()=>nameCount.textContent=nickname.value.length+' / 20자');
+submit.addEventListener('click',async()=>{
+ if(submitted)return;
+ const name=nickname.value.trim(),content=message.value.trim();
+ if(!name||name.length>20){status.textContent='닉네임을 1~20자로 입력해 주세요.';nickname.focus();return;}
+ if(!content||content.length>500){status.textContent='의견을 1~500자로 입력해 주세요.';message.focus();return;}
+ submit.disabled=true;status.textContent='의견을 전송하고 있습니다...';
+ try{
+  const {error}=await db.from('customer_feedback').insert({vehicle_id:null,nickname:name,message:content});
+  if(error)throw error;
+  submitted=true;nickname.value='';nickname.disabled=true;message.value='';message.disabled=true;nameCount.textContent='0 / 20자';count.textContent='0 / 500자';status.textContent='소중한 의견이 정상적으로 접수되었습니다. 감사합니다.';submit.textContent='제출 완료';
+ }catch(e){status.textContent='제출 실패: '+e.message;submit.disabled=false;}
 });
-
-submit.addEventListener('click', async () => {
-  if (submitted) return;
-
-  const content = message.value.trim();
-
-  if (!content || content.length > 500) {
-    status.textContent = '의견을 1~500자로 입력해 주세요.';
-    return;
-  }
-
-  submit.disabled = true;
-  status.textContent = '의견을 전송하고 있습니다...';
-
-  try {
-    const {error} = await db
-      .from('customer_feedback')
-      .insert({
-        vehicle_id: null,
-        message: content
-      });
-
-    if (error) throw error;
-
-    submitted = true;
-    message.value = '';
-    message.disabled = true;
-    count.textContent = '0 / 500자';
-    status.textContent =
-      '소중한 의견이 정상적으로 접수되었습니다. 감사합니다.';
-    submit.textContent = '제출 완료';
-
-  } catch(e) {
-    status.textContent = '제출 실패: ' + e.message;
-    submit.disabled = false;
-  }
-});
-</script>
-</body>
-</html>
+</script></body></html>
