@@ -38,7 +38,13 @@
       background: linear-gradient(145deg, #fff 12%, #fbfcff 54%, #f7f9fd);
     }
 
-    .symbols { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .symbols {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
     .wave { position: absolute; z-index: -1; pointer-events: none; }
     .wave-top { width: 62%; right: 0; top: 0; }
     .wave-bottom { width: 100%; bottom: 0; left: 0; }
@@ -66,6 +72,7 @@
     }
 
     .intro { margin-top: 9cqw; text-align: center; }
+
     .car-art {
       width: 27cqw;
       aspect-ratio: 116 / 115;
@@ -94,6 +101,7 @@
 
     form { margin-top: 8.4cqw; }
     .field { margin: 0 2.7%; }
+
     label {
       display: block;
       margin-bottom: 1.7cqw;
@@ -112,6 +120,7 @@
       color: #10162c;
       font-size: clamp(17px, 4.85cqw, 22px);
     }
+
     input::placeholder { color: #92959c; opacity: 1; }
 
     .primary, .feedback-link {
@@ -134,6 +143,7 @@
       box-shadow: 0 2px 5px #00449612;
       font-size: clamp(19px, 5.6cqw, 25px);
     }
+
     form .primary { margin-top: 5.8cqw; }
 
     .icon {
@@ -161,7 +171,13 @@
       color: #151b30;
       font-size: clamp(17px, 4.9cqw, 22px);
     }
-    .feedback-link .bubble { color: #0867d8; width: 1.75em; height: 1.75em; }
+
+    .feedback-link .bubble {
+      color: #0867d8;
+      width: 1.75em;
+      height: 1.75em;
+    }
+
     .feedback-link .arrow { margin-left: auto; width: .95em; }
 
     .notice {
@@ -171,9 +187,15 @@
       font-size: 15px;
       overflow-wrap: anywhere;
     }
+
     .notice:empty { display: none; }
 
-    .result { width: 92.5%; margin: auto; padding: 5cqw 0 23cqw; }
+    .result {
+      width: 92.5%;
+      margin: auto;
+      padding: 5cqw 0 23cqw;
+    }
+
     .back, .photo-nav {
       display: grid;
       place-items: center;
@@ -183,7 +205,9 @@
       border: 0;
       color: #10162c;
     }
+
     .back { background: transparent; font-size: 22px; }
+
     .result h2 {
       margin: 1cqw 0 4.5cqw;
       text-align: center;
@@ -200,7 +224,13 @@
       height: max(52px, 15.3cqw);
       border-radius: 14px;
     }
-    .plate-panel .icon { color: #0969d9; width: 9cqw; height: 9cqw; }
+
+    .plate-panel .icon {
+      color: #0969d9;
+      width: 9cqw;
+      height: 9cqw;
+    }
+
     .plate-panel strong {
       padding-left: 4.8cqw;
       border-left: 1px solid #bfc4d0;
@@ -215,7 +245,24 @@
       border-radius: 16px;
       background: #15191c;
     }
-    #mainPhoto { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+    .photo-open {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+
+    #mainPhoto {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
     .photo-nav {
       position: absolute;
       top: 50%;
@@ -224,10 +271,24 @@
       background: #fffffff0;
       box-shadow: 0 2px 6px #0002;
     }
+
     #prev { left: 3%; }
     #next { right: 3%; }
 
-    .thumbs { display: flex; gap: 2cqw; padding: 3cqw 1%; overflow-x: auto; }
+    .zoom-hint {
+      text-align: center;
+      color: #536078;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .thumbs {
+      display: flex;
+      gap: 2cqw;
+      padding: 3cqw 1%;
+      overflow-x: auto;
+    }
+
     .thumbs button {
       flex: 0 0 calc((100% - 6cqw) / 4);
       aspect-ratio: 1.23;
@@ -237,7 +298,9 @@
       background: transparent;
       overflow: hidden;
     }
+
     .thumbs button[aria-pressed="true"] { border-color: #006bed; }
+
     .thumbs img {
       display: block;
       width: 100%;
@@ -245,7 +308,12 @@
       object-fit: cover;
       border-radius: 6px;
     }
-    #save { width: 98%; margin: 2.7cqw auto 0; font-size: clamp(17px, 5.1cqw, 23px); }
+
+    #save {
+      width: 98%;
+      margin: 2.7cqw auto 0;
+      font-size: clamp(17px, 5.1cqw, 23px);
+    }
 
     .opinion {
       display: flex;
@@ -255,14 +323,114 @@
       padding: 4.6cqw 5.8cqw;
       border-radius: 17px;
     }
-    .opinion .icon { color: #0869da; width: 7.5cqw; height: 7.5cqw; }
-    .opinion h3 { margin-bottom: 2.5cqw; font-size: clamp(18px, 5.1cqw, 23px); }
-    #comment { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+
+    .opinion .icon {
+      color: #0869da;
+      width: 7.5cqw;
+      height: 7.5cqw;
+    }
+
+    .opinion h3 {
+      margin-bottom: 2.5cqw;
+      font-size: clamp(18px, 5.1cqw, 23px);
+    }
+
+    #comment {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+    }
 
     .result .feedback-link {
       width: 98%;
       margin: 3.5cqw auto 0;
       padding: 0 5.8cqw;
+    }
+
+    #viewer {
+      position: fixed;
+      inset: 0;
+      margin: 0;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      height: 100dvh;
+      max-height: none;
+      padding: 0;
+      border: 0;
+      background: #101318;
+      color: white;
+    }
+
+    #viewer::backdrop { background: #101318; }
+
+    .viewer-layout {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+    }
+
+    .viewer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+    }
+
+    .viewer-bar button, .viewer-tools button {
+      min-width: 44px;
+      min-height: 44px;
+      border: 1px solid #657083;
+      border-radius: 9px;
+      background: #252d3b;
+      color: white;
+      padding: 8px 12px;
+    }
+
+    .viewer-tools button:disabled { cursor: default; }
+
+    #zoomStage {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+      cursor: grab;
+    }
+
+    #zoomStage:active { cursor: grabbing; }
+
+    #zoomPhoto {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      max-width: none;
+      max-height: none;
+      transform-origin: center;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .viewer-tools {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .viewer-help {
+      text-align: center;
+      font-size: 13px;
+      color: #cbd4e3;
+      padding: 0 10px 12px;
     }
   </style>
 </head>
@@ -273,19 +441,29 @@
       <circle cx="10.5" cy="10.5" r="7.6"/>
       <path d="m16.3 16.3 5 5"/>
     </symbol>
+
     <symbol id="chatIcon" viewBox="0 0 24 24">
       <path d="M21.4 11.6c0 5-4.3 8.8-9.6 8.8-1.5 0-3-.3-4.3-.9l-4.7 1.3 1.4-4.1a8 8 0 0 1-2-5.1c0-4.9 4.3-8.7 9.6-8.7s9.6 3.8 9.6 8.7Z"/>
     </symbol>
-    <symbol id="rightIcon" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
-    <symbol id="leftIcon" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+
+    <symbol id="rightIcon" viewBox="0 0 24 24">
+      <path d="m9 5 7 7-7 7"/>
+    </symbol>
+
+    <symbol id="leftIcon" viewBox="0 0 24 24">
+      <path d="m15 5-7 7 7 7"/>
+    </symbol>
+
     <symbol id="carIcon" viewBox="0 0 32 32">
       <path d="m5 13 3-7a3 3 0 0 1 2.7-1.6h10.6A3 3 0 0 1 24 6l3 7M4 13h24M5 13l-1 4v8h24v-8l-1-4M5 25v2h3v-2m16 0v2h3v-2M13 19h6"/>
       <circle cx="8.3" cy="18.8" r="1"/>
       <circle cx="23.7" cy="18.8" r="1"/>
     </symbol>
+
     <symbol id="downloadIcon" viewBox="0 0 24 24">
       <path d="M12 3v12m-5-5 5 5 5-5M3 16v5h18v-5"/>
     </symbol>
+
     <symbol id="noteIcon" viewBox="0 0 24 24">
       <path d="M8 4H5a1 1 0 0 0-1 1v16h16V5a1 1 0 0 0-1-1h-3"/>
       <rect x="8" y="2" width="8" height="4" rx="1"/>
@@ -301,12 +479,14 @@
           <stop offset=".58" stop-color="#fff0dc"/>
           <stop offset="1" stop-color="#fff" stop-opacity="0"/>
         </linearGradient>
+
         <linearGradient id="blue" x1="100%" y1="0%" x2="45%" y2="100%">
           <stop stop-color="#b1d7fc"/>
           <stop offset=".58" stop-color="#e1eeff"/>
           <stop offset="1" stop-color="#f5f9ff" stop-opacity="0"/>
         </linearGradient>
       </defs>
+
       <path class="warm-top" d="M260 0C180 0 153 23 103 50S38 93 0 103V143H260Z" fill="url(#warm)"/>
       <path d="M260 65C198 81 148 105 112 133S67 171 36 186H260Z" fill="url(#blue)"/>
     </svg>
@@ -317,18 +497,21 @@
           <stop stop-color="#ffdaab"/>
           <stop offset="1" stop-color="#fff7eb"/>
         </linearGradient>
+
         <linearGradient id="bottomBlue" x1="0%" y1="100%" x2="100%" y2="25%">
           <stop stop-color="#e5f0fc"/>
           <stop offset=".6" stop-color="#a7d3fc"/>
           <stop offset="1" stop-color="#7fbef7"/>
         </linearGradient>
       </defs>
+
       <path d="M0 4C65 28 111 52 211 53S352 52 420 67V82H0Z" fill="url(#bottomWarm)"/>
       <path d="M117 82C216 39 318 0 420 2V82Z" fill="url(#bottomBlue)"/>
     </svg>
 
     <section class="home" id="home">
-      <div class="brand" role="img" aria-label="TS 한국교통안전공단 안양자동차검사소"></div>
+      <div class="brand" role="img"
+           aria-label="TS 한국교통안전공단 안양자동차검사소"></div>
 
       <div class="intro">
         <div class="car-art" aria-hidden="true"></div>
@@ -342,67 +525,129 @@
       <form id="lookup">
         <div class="field">
           <label for="plate">차량번호</label>
-          <input id="plate" placeholder="예) 123가 4567" maxlength="14"
-                 autocomplete="off" enterkeyhint="search" required>
+          <input id="plate" placeholder="예) 123가 4567"
+                 maxlength="14" autocomplete="off"
+                 enterkeyhint="search" required>
         </div>
+
         <button class="primary" id="search" type="submit">
-          <svg class="icon" aria-hidden="true"><use href="#searchIcon"/></svg>
+          <svg class="icon" aria-hidden="true">
+            <use href="#searchIcon"/>
+          </svg>
           <span id="searchLabel">조회하기</span>
         </button>
+
         <p class="notice" id="status" role="status"></p>
       </form>
 
       <a class="feedback-link" href="./feedback.html">
-        <svg class="icon bubble" aria-hidden="true"><use href="#chatIcon"/></svg>
+        <svg class="icon bubble" aria-hidden="true">
+          <use href="#chatIcon"/>
+        </svg>
         <span>고객님의 한마디</span>
-        <svg class="icon arrow" aria-hidden="true"><use href="#rightIcon"/></svg>
+        <svg class="icon arrow" aria-hidden="true">
+          <use href="#rightIcon"/>
+        </svg>
       </a>
     </section>
 
     <section class="result" id="result" hidden>
-      <button class="back" id="back" type="button" aria-label="조회 화면으로 돌아가기">
-        <svg class="icon" aria-hidden="true"><use href="#leftIcon"/></svg>
+      <button class="back" id="back" type="button"
+              aria-label="조회 화면으로 돌아가기">
+        <svg class="icon" aria-hidden="true">
+          <use href="#leftIcon"/>
+        </svg>
       </button>
+
       <h2 id="resultTitle" tabindex="-1">하체사진 조회 결과</h2>
 
       <div class="panel plate-panel">
-        <svg class="icon" aria-hidden="true"><use href="#carIcon"/></svg>
+        <svg class="icon" aria-hidden="true">
+          <use href="#carIcon"/>
+        </svg>
         <strong id="vehicle"></strong>
       </div>
 
       <div class="photo-frame">
-        <img id="mainPhoto" alt="차량 하체사진">
-        <button class="photo-nav" id="prev" type="button" aria-label="이전 사진">
-          <svg class="icon" aria-hidden="true"><use href="#leftIcon"/></svg>
+        <button class="photo-open" id="openZoom" type="button"
+                aria-label="현재 사진 확대하기" aria-haspopup="dialog">
+          <img id="mainPhoto" alt="차량 하체사진">
         </button>
-        <button class="photo-nav" id="next" type="button" aria-label="다음 사진">
-          <svg class="icon" aria-hidden="true"><use href="#rightIcon"/></svg>
+
+        <button class="photo-nav" id="prev" type="button"
+                aria-label="이전 사진">
+          <svg class="icon" aria-hidden="true">
+            <use href="#leftIcon"/>
+          </svg>
+        </button>
+
+        <button class="photo-nav" id="next" type="button"
+                aria-label="다음 사진">
+          <svg class="icon" aria-hidden="true">
+            <use href="#rightIcon"/>
+          </svg>
         </button>
       </div>
+
+      <p class="zoom-hint">사진을 누르면 크게 볼 수 있습니다.</p>
 
       <div class="thumbs" id="thumbs" aria-label="하체사진 선택"></div>
 
       <button class="primary" id="save" type="button">
-        <svg class="icon" aria-hidden="true"><use href="#downloadIcon"/></svg>
+        <svg class="icon" aria-hidden="true">
+          <use href="#downloadIcon"/>
+        </svg>
         현재 사진 저장하기
       </button>
+
       <p class="notice" id="photoNotice" role="status"></p>
 
       <div class="panel opinion" id="opinion" hidden>
-        <svg class="icon" aria-hidden="true"><use href="#noteIcon"/></svg>
+        <svg class="icon" aria-hidden="true">
+          <use href="#noteIcon"/>
+        </svg>
         <div>
           <h3>검사소 점검 소견</h3>
           <p id="comment"></p>
         </div>
       </div>
 
-      <a class="feedback-link" href="./feedback.html" aria-label="고객님의 한마디 작성하기">
-        <svg class="icon bubble" aria-hidden="true"><use href="#chatIcon"/></svg>
+      <a class="feedback-link" href="./feedback.html"
+         aria-label="고객님의 한마디 작성하기">
+        <svg class="icon bubble" aria-hidden="true">
+          <use href="#chatIcon"/>
+        </svg>
         <span>고객님의 한마디</span>
-        <svg class="icon arrow" aria-hidden="true"><use href="#rightIcon"/></svg>
+        <svg class="icon arrow" aria-hidden="true">
+          <use href="#rightIcon"/>
+        </svg>
       </a>
     </section>
   </main>
+
+  <dialog id="viewer" aria-labelledby="zoomTitle" aria-describedby="zoomHelp">
+    <div class="viewer-layout">
+      <div class="viewer-bar">
+        <strong id="zoomTitle">사진 확대</strong>
+        <button id="closeZoom" type="button" autofocus>닫기 ✕</button>
+      </div>
+
+      <div id="zoomStage">
+        <img id="zoomPhoto" alt="확대한 차량 하체사진" draggable="false">
+      </div>
+
+      <div class="viewer-tools">
+        <button id="zoomOut" type="button" aria-label="사진 축소">−</button>
+        <output id="zoomLevel" aria-label="확대 배율">1.0배</output>
+        <button id="zoomIn" type="button" aria-label="사진 확대">＋</button>
+        <button id="zoomReset" type="button">원래 크기</button>
+      </div>
+
+      <p class="viewer-help" id="zoomHelp">
+        두 손가락으로 확대 · 끌어서 이동
+      </p>
+    </div>
+  </dialog>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -425,10 +670,206 @@
       let current = 0;
       let currentPlate = "";
 
+      const viewer = $("viewer");
+      const stage = $("zoomStage");
+      const zoomImage = $("zoomPhoto");
+      const pointers = new Map();
+
+      let scale = 1;
+      let offsetX = 0;
+      let offsetY = 0;
+      let fitW = 0;
+      let fitH = 0;
+      let previousGesture = null;
+      let oldOverflow = "";
+
+      const clamp = (number, min, max) =>
+        Math.max(min, Math.min(max, number));
+
+      function renderZoom() {
+        const limitX = Math.max(
+          0, (fitW * scale - stage.clientWidth) / 2
+        );
+        const limitY = Math.max(
+          0, (fitH * scale - stage.clientHeight) / 2
+        );
+
+        offsetX = clamp(offsetX, -limitX, limitX);
+        offsetY = clamp(offsetY, -limitY, limitY);
+
+        zoomImage.style.transform =
+          `translate(-50%, -50%) translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+
+        $("zoomLevel").textContent = `${scale.toFixed(1)}배`;
+        $("zoomOut").disabled = scale <= 1;
+        $("zoomIn").disabled = scale >= 8;
+      }
+
+      function fitZoom() {
+        if (!viewer.open || !zoomImage.naturalWidth) return;
+
+        const ratio = Math.min(
+          stage.clientWidth / zoomImage.naturalWidth,
+          stage.clientHeight / zoomImage.naturalHeight
+        );
+
+        fitW = zoomImage.naturalWidth * ratio;
+        fitH = zoomImage.naturalHeight * ratio;
+
+        zoomImage.style.width = `${fitW}px`;
+        zoomImage.style.height = `${fitH}px`;
+
+        scale = 1;
+        offsetX = 0;
+        offsetY = 0;
+        pointers.clear();
+        previousGesture = null;
+        renderZoom();
+      }
+
+      function setZoom(nextScale, x = 0, y = 0) {
+        const value = clamp(nextScale, 1, 8);
+        const ratio = value / scale;
+
+        offsetX = x - (x - offsetX) * ratio;
+        offsetY = y - (y - offsetY) * ratio;
+        scale = value;
+        renderZoom();
+      }
+
+      function gesture() {
+        const points = [...pointers.values()].slice(0, 2);
+        if (!points.length) return null;
+
+        const rect = stage.getBoundingClientRect();
+        const a = points[0];
+        const b = points[1] || a;
+
+        return {
+          count: points.length,
+          x: (a.x + b.x) / 2 - rect.left - rect.width / 2,
+          y: (a.y + b.y) / 2 - rect.top - rect.height / 2,
+          distance: Math.hypot(a.x - b.x, a.y - b.y)
+        };
+      }
+
+      $("openZoom").addEventListener("click", () => {
+        if (!photos[current] || viewer.open) return;
+
+        $("zoomTitle").textContent =
+          `하체사진 ${current + 1} / ${photos.length}`;
+
+        zoomImage.style.visibility = "hidden";
+        zoomImage.src = photos[current].url;
+        zoomImage.alt = $("mainPhoto").alt;
+
+        oldOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        viewer.showModal();
+
+        if (zoomImage.complete && zoomImage.naturalWidth) {
+          fitZoom();
+          zoomImage.style.visibility = "visible";
+        }
+      });
+
+      zoomImage.addEventListener("load", () => {
+        fitZoom();
+        zoomImage.style.visibility = "visible";
+      });
+
+      $("closeZoom").addEventListener("click", () => viewer.close());
+
+      viewer.addEventListener("close", () => {
+        document.body.style.overflow = oldOverflow;
+        pointers.clear();
+        previousGesture = null;
+        zoomImage.removeAttribute("src");
+      });
+
+      $("zoomIn").addEventListener("click", () => setZoom(scale * 1.5));
+      $("zoomOut").addEventListener("click", () => setZoom(scale / 1.5));
+      $("zoomReset").addEventListener("click", fitZoom);
+
+      stage.addEventListener("pointerdown", event => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+
+        stage.setPointerCapture(event.pointerId);
+
+        pointers.set(event.pointerId, {
+          x: event.clientX,
+          y: event.clientY
+        });
+
+        previousGesture = gesture();
+      });
+
+      stage.addEventListener("pointermove", event => {
+        if (!pointers.has(event.pointerId)) return;
+
+        pointers.set(event.pointerId, {
+          x: event.clientX,
+          y: event.clientY
+        });
+
+        const next = gesture();
+        const prev = previousGesture;
+
+        if (prev && next.count === prev.count) {
+          const value = next.count === 2 && prev.distance > 0
+            ? clamp(scale * next.distance / prev.distance, 1, 8)
+            : scale;
+
+          const ratio = value / scale;
+
+          offsetX = next.x - (prev.x - offsetX) * ratio;
+          offsetY = next.y - (prev.y - offsetY) * ratio;
+          scale = value;
+
+          renderZoom();
+        }
+
+        previousGesture = next;
+      });
+
+      for (const name of [
+        "pointerup",
+        "pointercancel",
+        "lostpointercapture"
+      ]) {
+        stage.addEventListener(name, event => {
+          pointers.delete(event.pointerId);
+          previousGesture = gesture();
+        });
+      }
+
+      stage.addEventListener("wheel", event => {
+        event.preventDefault();
+
+        const rect = stage.getBoundingClientRect();
+
+        setZoom(
+          scale * Math.exp(-event.deltaY * .002),
+          event.clientX - rect.left - rect.width / 2,
+          event.clientY - rect.top - rect.height / 2
+        );
+      }, { passive: false });
+
+      new ResizeObserver(() => {
+        if (viewer.open) fitZoom();
+      }).observe(stage);
+
       function clearPhotos() {
+        if (viewer.open) viewer.close();
+
         $("mainPhoto").removeAttribute("src");
         $("thumbs").replaceChildren();
-        for (const photo of photos) URL.revokeObjectURL(photo.url);
+
+        for (const photo of photos) {
+          URL.revokeObjectURL(photo.url);
+        }
+
         photos = [];
         current = 0;
         $("photoNotice").textContent = "";
@@ -438,18 +879,26 @@
         if (!photos.length) return;
 
         current = (index + photos.length) % photos.length;
+
         $("mainPhoto").src = photos[current].url;
-        $("mainPhoto").alt = `차량 하체사진 ${current + 1} / ${photos.length}`;
+        $("mainPhoto").alt =
+          `차량 하체사진 ${current + 1} / ${photos.length}`;
 
         const strip = $("thumbs");
+
         Array.from(strip.children).forEach((button, i) => {
           button.setAttribute("aria-pressed", String(i === current));
         });
 
         const selected = strip.children[current].getBoundingClientRect();
         const bounds = strip.getBoundingClientRect();
-        if (selected.left < bounds.left) strip.scrollLeft += selected.left - bounds.left;
-        if (selected.right > bounds.right) strip.scrollLeft += selected.right - bounds.right;
+
+        if (selected.left < bounds.left) {
+          strip.scrollLeft += selected.left - bounds.left;
+        }
+        if (selected.right > bounds.right) {
+          strip.scrollLeft += selected.right - bounds.right;
+        }
       }
 
       function openResult(plate, comment) {
@@ -476,6 +925,7 @@
         $("home").hidden = true;
         $("result").hidden = false;
         $("page").classList.add("is-result");
+
         showPhoto(0);
         window.scrollTo(0, 0);
         $("resultTitle").focus({ preventScroll: true });
@@ -496,19 +946,30 @@
         try {
           const signed = await storage.createSignedUrl(path, 120);
           if (signed.error) throw signed.error;
-          if (!signed.data?.signedUrl) throw new Error("임시 링크 발급 실패");
+          if (!signed.data?.signedUrl) {
+            throw new Error("임시 링크 발급 실패");
+          }
 
-          const response = await fetch(signed.data.signedUrl, { cache: "no-store" });
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const response = await fetch(signed.data.signedUrl, {
+            cache: "no-store"
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
 
           const blob = await response.blob();
           if (!blob.size) throw new Error("빈 파일");
+
           return blob;
         } catch (retryError) {
           const message = error => String(error?.message || "응답 없음")
             .replace(/https?:\/\/\S+/g, "[주소 생략]")
             .slice(0, 100);
-          throw new Error(`${message(firstError)} / 재시도 ${message(retryError)}`);
+
+          throw new Error(
+            `${message(firstError)} / 재시도 ${message(retryError)}`
+          );
         }
       }
 
@@ -517,8 +978,10 @@
         if ($("search").disabled) return;
 
         const plate = $("plate").value.replace(/\s+/g, "");
+
         if (!/^\d{2,3}[가-힣]\d{4}$/.test(plate)) {
-          $("status").textContent = "차량번호를 확인해 주세요. 예) 123가 4567";
+          $("status").textContent =
+            "차량번호를 확인해 주세요. 예) 123가 4567";
           $("plate").focus();
           return;
         }
@@ -530,6 +993,7 @@
         }
 
         clearPhotos();
+
         $("search").disabled = true;
         $("searchLabel").textContent = "조회 중…";
         $("status").textContent = "";
@@ -545,8 +1009,10 @@
             .maybeSingle();
 
           if (vehicleError) throw vehicleError;
+
           if (!vehicle) {
-            $("status").textContent = "해당 차량번호로 조회 가능한 사진이 없습니다.";
+            $("status").textContent =
+              "해당 차량번호로 조회 가능한 사진이 없습니다.";
             return;
           }
 
@@ -557,8 +1023,10 @@
             .order("photo_order", { ascending: true });
 
           if (listError) throw listError;
+
           if (!rows?.length) {
-            $("status").textContent = "이 차량에 등록된 하체사진이 없습니다.";
+            $("status").textContent =
+              "이 차량에 등록된 하체사진이 없습니다.";
             return;
           }
 
@@ -566,10 +1034,12 @@
           let lastError = "";
 
           for (const [index, row] of rows.entries()) {
-            $("searchLabel").textContent = `사진 불러오는 중 ${index + 1}/${rows.length}`;
+            $("searchLabel").textContent =
+              `사진 불러오는 중 ${index + 1}/${rows.length}`;
 
             try {
               const blob = await downloadPhoto(storage, row.storage_path);
+
               photos.push({
                 url: URL.createObjectURL(blob),
                 type: blob.type,
@@ -582,7 +1052,8 @@
           }
 
           if (!photos.length) {
-            $("status").textContent = `사진 다운로드 실패 · ${lastError || "응답 없음"}`;
+            $("status").textContent =
+              `사진 다운로드 실패 · ${lastError || "응답 없음"}`;
             return;
           }
 
@@ -592,11 +1063,13 @@
           }
 
           openResult(plate, (vehicle.inspection_comment || "").trim());
+
         } catch (error) {
           clearPhotos();
           console.error("하체사진 조회 오류", error);
           $("status").textContent =
             "사진 조회 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
+
         } finally {
           $("search").disabled = false;
           $("searchLabel").textContent = "조회하기";
@@ -629,7 +1102,9 @@
 
         const link = document.createElement("a");
         link.href = photo.url;
-        link.download = `${currentPlate}_하체사진_${photo.order}.${extension}`;
+        link.download =
+          `${currentPlate}_하체사진_${photo.order}.${extension}`;
+
         document.body.append(link);
         link.click();
         link.remove();
